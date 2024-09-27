@@ -4,7 +4,10 @@ const { registerUser, loginUser } = require('./controllers/userController');
 const app = express();
 const PORT = 3000;
 
-app.use(express.json()); // Middleware para tratar JSON
+const cors = require('cors');
+app.use(cors());
+
+app.use(express.json());
 
 // Rota de cadastro de usuário
 app.post('/register', registerUser);

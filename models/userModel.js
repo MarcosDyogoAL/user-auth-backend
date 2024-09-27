@@ -1,4 +1,4 @@
-const pool = require('../db'); // Conexão com o PostgreSQL
+const pool = require('../db');
 
 // Função para criar um novo usuário no banco de dados
 const createUser = async (name, email, password) => {
