@@ -1,4 +1,4 @@
-const { createUser, findUserByEmail } = require('../models/userModel');
+const { createUser, findUserByEmail, findUserByCredentials} = require('../models/userModel');
 
 // Função para cadastrar um novo usuário
 const registerUser = async (req, res) => {
@@ -20,4 +20,24 @@ const registerUser = async (req, res) => {
     }
 };
 
-module.exports = { registerUser };
+// Função para fazer login do usuário
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Verificar se o usuário existe com o email e a senha fornecidos
+        const user = await findUserByCredentials(email, password);
+
+        if (!user) {
+            return res.status(401).json({ message: 'Credenciais inválidas' });
+        }
+
+        // Usuário autenticado com sucesso
+        res.status(200).json({ message: 'Login bem-sucedido', user });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Erro no servidor' });
+    }
+};
+
+module.exports = { registerUser, loginUser };
