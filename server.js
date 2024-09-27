@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerUser } = require('./controllers/userController');
+const { registerUser, loginUser } = require('./controllers/userController');
 
 const app = express();
 const PORT = 3000;
@@ -8,6 +8,9 @@ app.use(express.json()); // Middleware para tratar JSON
 
 // Rota de cadastro de usuário
 app.post('/register', registerUser);
+
+// Rota de login de usuário
+app.post('/login', loginUser);
 
 // Iniciar o servidor
 app.listen(PORT, () => {
